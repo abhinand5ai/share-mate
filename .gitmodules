@@ -1,3 +1,0 @@
-[submodule "smart-contracts"]
-	path = smart-contracts
-	url = git@github.com:abhinand5ai/smart-contracts.git
