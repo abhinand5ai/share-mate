@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import styles from './Notes.module.css';
 import CreateNote from './CreateNote';
-import { RideFactoryABI } from '@/ethereum/factory';
+
 
 // export const dynamic = 'auto',
 //   dynamicParams = true,
@@ -22,7 +22,6 @@ async function getNotes() {
 
 export default async function NotesPage() {
     const notes = await getNotes();
-    console.log(RideFactoryABI)
     return (
         <div>
             <h1>Notes</h1>

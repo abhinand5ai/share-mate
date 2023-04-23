@@ -4,8 +4,7 @@ import Header from "./Header";
 export default function RidesLayout(props: any) {
     return (
         <div>
-            
-            <Header></Header>
+            <Header />
             {props.children}
         </div>
     );

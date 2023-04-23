@@ -1,18 +1,27 @@
 import React from "react";
+import { getRideContract } from "../../ethereum/rides";
 
-
-async function getRideContracts() {
-    // const db = new PocketBase('http://127.0.0.1:8090');
-    // const result = await db.records.getList('notes');
-    const res = await fetch('http://127.0.0.1:8090/api/collections/notes/records?page=1&perPage=30', { cache: 'no-store' });
-    const data = await res.json();
-    return data?.items as any[];
+async function getRides() {
+    const rideContract = await getRideContract();
+    console.log(rideContract);
+    if (!rideContract) {
+        return [];
+    }
+    // const rides = await rideContract.methods.getRides.call();
+    return [];
 }
 
-export default function RidesPage() {
+export default async function RidesPage() {
+    const rides = await getRides();
+    console.log(rides);
     return (
         <div>
             <h1>Rides</h1>
+            <ul>
+                {rides.map((index, ride) => (
+                    <li key={index}>{ride}</li>
+                ))}
+            </ul>
         </div>
     );
 }
