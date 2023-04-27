@@ -1,14 +1,17 @@
 import React from "react";
-import { getRideContract } from "../../ethereum/rides";
+
+import { Button, Form } from "semantic-ui-react";
+import CreateRide from "./CreateRide";
+import { getRideFactoryContract } from "@/ethereum/rides";
 
 async function getRides() {
-    const rideContract = await getRideContract();
-    console.log(rideContract);
-    if (!rideContract) {
-        return [];
+    const rideFactoryContract = await getRideFactoryContract()
+    if (!rideFactoryContract) {
+        return []
     }
-    // const rides = await rideContract.methods.getRides.call();
-    return [];
+    const rides = await rideFactoryContract.methods.getRides().call();
+    console.log(rides);
+    return rides as any[];
 }
 
 export default async function RidesPage() {
@@ -17,11 +20,8 @@ export default async function RidesPage() {
     return (
         <div>
             <h1>Rides</h1>
-            <ul>
-                {rides.map((index, ride) => (
-                    <li key={index}>{ride}</li>
-                ))}
-            </ul>
+            <p>Num Rides {rides.length}</p>
+            <CreateRide />
         </div>
     );
 }
