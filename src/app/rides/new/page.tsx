@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getRideFactoryContract } from '@/ethereum/rides';
@@ -7,6 +6,8 @@ import { getRideFactoryContract } from '@/ethereum/rides';
 export default function CreateRide() {
     const [price, setPrice] = useState('');
     const [driver, setDrive] = useState('');
+    const [origin, setOrigin] = useState('');
+    const [destination, setDestination] = useState('');
 
     const router = useRouter();
 
@@ -20,7 +21,7 @@ export default function CreateRide() {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         console.log(accounts);
         try {
-            const resp = await rideFactoryContract.methods.createRide(price, driver).send({
+            const resp = await rideFactoryContract.methods.createRide(price, driver, origin, destination).send({
                 from: window.ethereum.selectedAddress,
             });
             console.log(resp);
@@ -30,7 +31,9 @@ export default function CreateRide() {
         }
         setPrice('');
         setDrive('');
-        // router.refresh();
+        setOrigin('');
+        setDestination('');
+        router.push('/rides');
     }
 
     return (
@@ -50,6 +53,21 @@ export default function CreateRide() {
                 value={driver}
                 onChange={(e) => setDrive(e.target.value)}
             />
+            <input
+                type="text"
+                placeholder="Origin"
+                value={origin}
+                onChange={(e) => setOrigin(e.target.value)}
+            />
+            <input
+
+                type="text"
+                placeholder="Destination"
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+            />
+
+
             <button type="submit">
                 Create Ride
             </button>

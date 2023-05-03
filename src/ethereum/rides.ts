@@ -9,8 +9,9 @@ export const getRideFactoryContract = async () => {
 
   const web3 = await getWeb3();
   if (!web3) return;
-  const contractAddress = "0xF1aAB2FA4Fe71A780Ff039223eA3a18b9Fb0c7CE";
-  return new web3.eth.Contract(rideFactoryABI, contractAddress);
+  const contractAddress = "0x19ec45b781102D163A73B933e8dE02e66D7Dbbd0";
+  const contract = new web3.eth.Contract(rideFactoryABI, contractAddress);
+  return contract;
 }
 
 export const getRideContract = async (rideAddress: string) => {
@@ -22,7 +23,3 @@ export const getRideContract = async (rideAddress: string) => {
   if (!web3) return;
   return new web3.eth.Contract(rideABI, rideAddress);
 }
-
-// const contractAddress = "0xF1aAB2FA4Fe71A780Ff039223eA3a18b9Fb0c7CE"
-
-// const rideContract = new web3.eth.Contract(RideFactoryABI, contractAddress);
